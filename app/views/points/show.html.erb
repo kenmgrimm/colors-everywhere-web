@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Position x:</b>
+  <%= @point.position_x %>
+</p>
+
+<p>
+  <b>Position y:</b>
+  <%= @point.position_y %>
+</p>
+
+<p>
+  <b>Position z:</b>
+  <%= @point.position_z %>
+</p>
+
+
+<%= link_to 'Edit', edit_stroke_point_path(@point.stroke, @point) %> |
+<%= link_to 'Back', stroke_points_path(@point.stroke) %>

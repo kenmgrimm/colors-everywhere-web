@@ -1,0 +1,27 @@
+<h1>Listing points</h1>
+
+<table>
+  <tr>
+    <th>Position x</th>
+    <th>Position y</th>
+    <th>Position z</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @points.each do |point| %>
+  <tr>
+    <td><%= point.position_x %></td>
+    <td><%= point.position_y %></td>
+    <td><%= point.position_z %></td>
+    <td><%= link_to 'Show', [point.stroke, point] %></td>
+    <td><%= link_to 'Edit', edit_stroke_point_path(point.stroke, point) %></td>
+    <td><%= link_to 'Destroy', [point.stroke, point], :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Point', new_stroke_point_path(params[:stroke_id]) %>

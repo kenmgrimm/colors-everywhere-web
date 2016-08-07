@@ -1,0 +1,1 @@
+json.array! @stroke_points, partial: 'stroke_points/stroke_point', as: :stroke_point

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @painting.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @painting.longitude %>
+</p>
+
+<p>
+  <strong>Direction degrees:</strong>
+  <%= @painting.direction_degrees %>
+</p>
+
+<%= link_to 'Edit', edit_painting_path(@painting) %> |
+<%= link_to 'Back', paintings_path %>

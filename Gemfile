@@ -6,6 +6,8 @@ gem 'rails', '4.2.5.2'
 
 gem 'rspec-rails'
 
+gem 'nested_scaffold'
+
 group :production do
   gem 'pg'
 end

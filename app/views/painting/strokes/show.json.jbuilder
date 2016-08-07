@@ -1,0 +1,1 @@
+json.partial! "painting_strokes/painting_stroke", painting_stroke: @painting_stroke

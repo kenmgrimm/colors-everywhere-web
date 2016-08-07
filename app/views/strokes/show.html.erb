@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Brush type:</b>
+  <%= @stroke.brush_type %>
+</p>
+
+<p>
+  <b>Color:</b>
+  <%= @stroke.color %>
+</p>
+
+
+<%= link_to 'Edit', edit_painting_stroke_path(@stroke.painting, @stroke) %> |
+<%= link_to 'Back', painting_strokes_path(@stroke.painting) %>

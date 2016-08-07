@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Paintings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Direction degrees</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @paintings.each do |painting| %>
+      <tr>
+        <td><%= painting.latitude %></td>
+        <td><%= painting.longitude %></td>
+        <td><%= painting.direction_degrees %></td>
+        <td><%= link_to 'Show', painting %></td>
+        <td><%= link_to 'Edit', edit_painting_path(painting) %></td>
+        <td><%= link_to 'Destroy', painting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Painting', new_painting_path %>

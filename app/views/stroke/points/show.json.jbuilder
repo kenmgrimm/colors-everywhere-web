@@ -1,0 +1,1 @@
+json.partial! "stroke_points/stroke_point", stroke_point: @stroke_point
