@@ -1,0 +1,5 @@
+Setup
+
+bin/rails generate scaffold painting latitude:float longitude:float direction_degrees:integer
+bin/rails generate nested_scaffold painting/stroke brush_type:integer color:string
+bin/rails generate nested_scaffold stroke/point position_x:float position_y:float position_z:float
