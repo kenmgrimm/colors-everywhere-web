@@ -2,6 +2,7 @@ class Painting < ActiveRecord::Base
   has_many :strokes, dependent: :destroy
   accepts_nested_attributes_for :strokes
 
+
   def as_json(options={})
     super(
       only: [:latitude, :longitude, :direction_degrees],

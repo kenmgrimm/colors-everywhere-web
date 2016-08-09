@@ -3,4 +3,5 @@ class Stroke < ActiveRecord::Base
   accepts_nested_attributes_for :points
 
   belongs_to :painting
+
 end

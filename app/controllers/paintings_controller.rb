@@ -2,7 +2,7 @@ class PaintingsController < ApplicationController
   before_action :set_painting, only: [:show, :edit, :update, :destroy]
 
   def index
-    @paintings = Painting.all
+    @paintings = Painting.order(id: :desc).limit(20)
   end
 
   def show
@@ -22,7 +22,7 @@ class PaintingsController < ApplicationController
     respond_to do |format|
       if @painting.save
         format.html { redirect_to @painting, notice: 'Painting was successfully created.' }
-        format.json { render :show, status: :created, location: @painting }
+        format.json { render json: @painting }
       else
         format.html { render :new }
         format.json { render json: @painting.errors, status: :unprocessable_entity }
@@ -56,22 +56,26 @@ class PaintingsController < ApplicationController
       @painting = Painting.find(params[:id])
     end
 
+    def transform_stroke_input stroke
+      stroke['points_attributes'] = stroke.delete('points')
+
+      stroke['points_attributes'].each do |point|
+        point[:position_x] = point.delete('x')
+        point[:position_y] = point.delete('y')
+        point[:position_z] = point.delete('z')
+      end
+    end
+
     def painting_params
-      params.require(:painting).permit(
-        :latitude,
-        :longitude,
-        :direction_degrees,
-        {
-          :strokes_attributes => [
-            :brush_type,
-            :color,
-            :points_attributes => [
-              :position_x,
-              :position_y,
-              :position_z
-            ]
-          ]
-        })
+      painting_json = JSON.parse(params.require(:painting))
+
+      painting_json[:strokes_attributes] = painting_json.delete('strokes')
+
+      painting_json[:strokes_attributes].each do |stroke|
+        transform_stroke_input(stroke)
+      end
+
+      painting_json
     end
 end
 

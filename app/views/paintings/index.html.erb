@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Id</th>
       <th>Latitude</th>
       <th>Longitude</th>
       <th>Direction degrees</th>
@@ -15,6 +16,7 @@
   <tbody>
     <% @paintings.each do |painting| %>
       <tr>
+      <td><%= painting.id %></td>
         <td><%= painting.latitude %></td>
         <td><%= painting.longitude %></td>
         <td><%= painting.direction_degrees %></td>
