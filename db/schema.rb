@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160807000726) do
+ActiveRecord::Schema.define(version: 20160810142124) do
 
   create_table "paintings", force: :cascade do |t|
     t.float    "latitude"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20160807000726) do
     t.string   "color"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.float    "brush_width"
   end
 
 end

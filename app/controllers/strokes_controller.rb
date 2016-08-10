@@ -50,15 +50,15 @@ class StrokesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_strokes
-      @painting = Painting.find(params[:painting_id])
+      @painting = Painting.find(stroke_params[:painting_id])
     end
 
     def set_stroke
-      @stroke = @painting.strokes.find(params[:id])
+      @stroke = @painting.strokes.find(stroke_params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def stroke_params
-      params.require(:stroke).permit(:brush_type, :color)
+      params.require(:stroke).permit(:brush_type, :color, :brush_width)
     end
 end
