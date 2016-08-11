@@ -6,6 +6,7 @@ class PaintingsController < ApplicationController
   end
 
   def show
+    puts @painting.strokes.size
     render json: @painting
   end
 
@@ -57,6 +58,14 @@ class PaintingsController < ApplicationController
     end
 
     def transform_stroke_input stroke
+      # if updating
+      stroke.delete('id')
+      # Add in to delete point id on update to
+      # also need to create higher level point structure that contains an id
+      #  OR  do I switch this all over to a JSON blob
+
+
+
       stroke['points_attributes'] = stroke.delete('points')
 
       stroke['points_attributes'].each do |point|

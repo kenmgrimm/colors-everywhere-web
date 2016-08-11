@@ -5,13 +5,13 @@ class Painting < ActiveRecord::Base
 
   def as_json(options={})
     super(
-      only: [:latitude, :longitude, :direction_degrees],
+      only: [:id, :latitude, :longitude, :direction_degrees],
       include: {
         strokes: {
-          only: [:brush_type, :color],
+          only: [:id, :painting_id, :brush_type, :color, :brush_width],
           include: {
             points: {
-              only: [:position_x, :position_y, :position_z]
+              only: [:id, :stroke_id, :position_x, :position_y, :position_z]
             }
           }
         }

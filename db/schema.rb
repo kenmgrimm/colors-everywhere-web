@@ -11,15 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160810142124) do
+ActiveRecord::Schema.define(version: 20160811221336) do
 
-  create_table "paintings", force: :cascade do |t|
-    t.float    "latitude"
-    t.float    "longitude"
-    t.integer  "direction_degrees"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-  end
+# Could not dump table "paintings" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
   create_table "points", force: :cascade do |t|
     t.integer  "stroke_id"
