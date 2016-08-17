@@ -1,6 +1,21 @@
 == README
 
-Setup
+== postgres
+brew install pg
+
+# got psql: could not connect to server: No such file or directory
+#  Is the server running locally and accepting
+#  connections on Unix domain socket "/tmp/.s.PGSQL.5432"?
+# so ran:
+initdb /usr/local/var/postgres -E utf8
+gem install pg -- --with-pg-config=/usr/local/bin/pg_config
+bin/rake db:create:all
+
+
+
+== OLD w/ relational
+
+== Setup
 
 bin/rails generate scaffold painting latitude:float longitude:float direction_degrees:integer
 bin/rails generate nested_scaffold painting/stroke brush_type:integer color:string

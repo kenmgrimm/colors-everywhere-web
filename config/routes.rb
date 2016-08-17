@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-  resources :strokes do
-    resources :points
-  end
-
   resources :paintings do
+    resources :strokes do
+      resources :points
+    end
   end
 
   post "/paintings/:id" => "paintings#update"

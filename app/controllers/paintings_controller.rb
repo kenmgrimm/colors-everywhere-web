@@ -1,4 +1,6 @@
 class PaintingsController < ApplicationController
+  include PaintingsHelper
+
   before_action :set_painting, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -6,8 +8,10 @@ class PaintingsController < ApplicationController
   end
 
   def show
-    puts @painting.strokes.size
-    render json: @painting
+    respond_to do |format|
+      format.json { render json: @painting.api_json }
+      format.html { render json: @painting }
+    end
   end
 
   def new
@@ -18,22 +22,24 @@ class PaintingsController < ApplicationController
   end
 
   def create
-    @painting = Painting.new(painting_params)
+    full_payload = JSON.parse(painting_params)
+    full_payload.delete('id')
 
-    respond_to do |format|
-      if @painting.save
-        format.html { redirect_to @painting, notice: 'Painting was successfully created.' }
-        format.json { render json: @painting }
-      else
-        format.html { render :new }
-        format.json { render json: @painting.errors, status: :unprocessable_entity }
-      end
+    create_params = full_payload.clone
+    create_params.delete('strokeDatas')
+
+    @painting = Painting.new(create_params.merge({ data: full_payload }))
+
+    if @painting.save
+      render json: @painting
+    else
+      render json: @painting.errors, status: :unprocessable_entity
     end
   end
 
   def update
     respond_to do |format|
-      if @painting.update(painting_params)
+      if @painting.update_attribute(:data, painting_params)
         format.html { redirect_to @painting, notice: 'Painting was successfully updated.' }
         format.json { render :show, status: :ok, location: @painting }
       else
@@ -58,14 +64,8 @@ class PaintingsController < ApplicationController
     end
 
     def transform_stroke_input stroke
-      # if updating
       stroke.delete('id')
-      # Add in to delete point id on update to
-      # also need to create higher level point structure that contains an id
-      #  OR  do I switch this all over to a JSON blob
-
-
-
+      # For now these are an array of serialized vectors on the app end so we get x, y, z and need to translate here.  Need to fix
       stroke['points_attributes'] = stroke.delete('points')
 
       stroke['points_attributes'].each do |point|
@@ -76,18 +76,6 @@ class PaintingsController < ApplicationController
     end
 
     def painting_params
-      painting_json = JSON.parse(params.require(:painting))
-
-      painting_json[:strokes_attributes] = painting_json.delete('strokes')
-
-      painting_json[:strokes_attributes].each do |stroke|
-        transform_stroke_input(stroke)
-      end
-
-      painting_json
+      params.require(:painting)
     end
 end
-
-
-
-

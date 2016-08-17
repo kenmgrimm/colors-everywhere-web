@@ -13,8 +13,17 @@
 
 ActiveRecord::Schema.define(version: 20160811221336) do
 
-# Could not dump table "paintings" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "paintings", force: :cascade do |t|
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "direction_degrees"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.jsonb    "data"
+  end
 
   create_table "points", force: :cascade do |t|
     t.integer  "stroke_id"
@@ -34,4 +43,6 @@ ActiveRecord::Schema.define(version: 20160811221336) do
     t.float    "brush_width"
   end
 
+  add_foreign_key "points", "strokes"
+  add_foreign_key "strokes", "paintings"
 end
