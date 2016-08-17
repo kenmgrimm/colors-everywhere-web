@@ -8,13 +8,7 @@ gem 'rspec-rails'
 
 gem 'nested_scaffold'
 
-group :production do
-  gem 'pg'
-end
-group :development, :test do
-  gem 'pry'
-  gem 'sqlite3'
-end
+gem 'pg', '~> 0.18.4'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
