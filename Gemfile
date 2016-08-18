@@ -9,6 +9,7 @@ gem 'rspec-rails'
 gem 'nested_scaffold'
 
 gem 'pg', '~> 0.18.4'
+gem 'rails_12factor'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
