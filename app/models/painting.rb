@@ -1,5 +1,9 @@
 class Painting < ActiveRecord::Base
-    def api_json
-      data.merge({ id: id })
-    end
+  scope :summary, -> {
+    select('id', 'latitude', 'longitude', 'direction_degrees').limit(20)
+  }
+
+  def api_json
+    data.merge({ id: id })
+  end
 end

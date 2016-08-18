@@ -5,5 +5,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get "/paintings_summary" => 'paintings#summary'
+
   post "/paintings/:id" => "paintings#update"
 end

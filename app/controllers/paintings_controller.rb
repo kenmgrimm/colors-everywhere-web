@@ -4,7 +4,15 @@ class PaintingsController < ApplicationController
   before_action :set_painting, only: [:show, :edit, :update, :destroy]
 
   def index
-    @paintings = Painting.order(id: :desc).limit(20)
+    paintings = Painting.order(id: :desc).limit(20)
+
+    render json: paintings
+  end
+
+  def summary
+    paintings = Painting.summary
+
+    render json: paintings
   end
 
   def show
@@ -28,12 +36,12 @@ class PaintingsController < ApplicationController
     create_params = full_payload.clone
     create_params.delete('strokeDatas')
 
-    @painting = Painting.new(create_params.merge({ data: full_payload }))
+    painting = Painting.new(create_params.merge({ data: full_payload }))
 
-    if @painting.save
-      render json: @painting
+    if painting.save
+      render json: painting
     else
-      render json: @painting.errors, status: :unprocessable_entity
+      render json: painting.errors, status: :unprocessable_entity
     end
   end
 
