@@ -10,7 +10,10 @@ gem 'nested_scaffold'
 
 gem 'pg', '~> 0.18.4'
 gem 'rails_12factor'
-gem 'unicorn'
+
+group :production do
+    gem 'unicorn'
+end
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
