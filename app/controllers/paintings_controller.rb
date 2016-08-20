@@ -9,17 +9,14 @@ class PaintingsController < ApplicationController
     render json: paintings
   end
 
-  def summary
+  def map_data
     paintings = Painting.summary
 
-    render json: paintings
+    render json: { paintingSummaries: paintings }
   end
 
   def show
-    respond_to do |format|
-      format.json { render json: @painting.api_json }
-      format.html { render json: @painting }
-    end
+    render json: @painting.api_json
   end
 
   def new
