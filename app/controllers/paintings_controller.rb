@@ -1,3 +1,7 @@
+require 'zlib'
+require 'stringio'
+
+
 class PaintingsController < ApplicationController
   include PaintingsHelper
 
@@ -81,6 +85,8 @@ class PaintingsController < ApplicationController
     end
 
     def painting_params
-      params.require(:painting)
+      gz = Zlib::GzipReader.new(StringIO.new(Base64.decode64(params.require(:painting))))
+
+      gz.read
     end
 end
