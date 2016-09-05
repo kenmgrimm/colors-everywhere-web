@@ -8,9 +8,16 @@ class PaintingsController < ApplicationController
   before_action :set_painting, only: [:show, :edit, :update, :destroy]
 
   def index
-    paintings = Painting.order(id: :desc).limit(20)
+    @paintings = Painting.order(id: :desc).limit(20)
 
-    render json: paintings
+    respond_to do |format|
+      format.html do
+        render :index
+      end
+      format.json do
+        render json: @paintings
+      end
+    end
   end
 
   def map_data
